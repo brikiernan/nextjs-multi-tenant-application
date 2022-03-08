@@ -1,25 +1,25 @@
-import Layout from "@/components/sites/Layout";
-import Link from "next/link";
-import Tweet from "@/components/mdx/Tweet";
-import { remark } from "remark";
-import remarkMdx from "remark-mdx";
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote } from "next-mdx-remote";
-import BlurImage from "@/components/BlurImage";
-import BlogCard from "@/components/BlogCard";
-import Examples from "@/components/mdx/Examples";
-import Date from "@/components/Date";
-import prisma from "@/lib/prisma";
-import { useRouter } from "next/router";
-import Loader from "@/components/sites/Loader";
+import Layout from '@/components/sites/Layout';
+import Link from 'next/link';
+// import Tweet from '@/components/mdx/Tweet';
+import { remark } from 'remark';
+import remarkMdx from 'remark-mdx';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote';
+import BlurImage from '@/components/BlurImage';
+import BlogCard from '@/components/BlogCard';
+import Examples from '@/components/mdx/Examples';
+import Date from '@/components/Date';
+import prisma from '@/lib/prisma';
+import { useRouter } from 'next/router';
+import Loader from '@/components/sites/Loader';
 import {
   replaceLinks,
-  replaceTweets,
+  // replaceTweets,
   replaceExamples,
-} from "@/lib/remark-plugins";
+} from '@/lib/remark-plugins';
 
 const components = {
-  Tweet,
+  // Tweet,
   BlurImage,
   Examples,
   a: replaceLinks,
@@ -37,27 +37,27 @@ export default function Post(props) {
   const meta = {
     title: data.title,
     description: data.description,
-    ogUrl: `https://${data.site.subdomain}.vercel.pub/${data.slug}`,
+    ogUrl: `https://${data.site.subdomain}.myhomecomp.com/${data.slug}`,
     ogImage: data.image,
-    logo: "/logo.png",
+    logo: '/logo.png',
   };
 
   return (
     <Layout meta={meta} subdomain={data.site.subdomain}>
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-center w-full md:w-7/12 m-auto">
-          <p className="text-sm md:text-base font-light text-gray-500 w-10/12 m-auto my-5">
+      <div className='flex flex-col justify-center items-center'>
+        <div className='text-center w-full md:w-7/12 m-auto'>
+          <p className='text-sm md:text-base font-light text-gray-500 w-10/12 m-auto my-5'>
             <Date dateString={data.createdAt} />
           </p>
-          <h1 className="font-bold text-3xl font-cal md:text-6xl mb-10 text-gray-800">
+          <h1 className='font-bold text-3xl font-cal md:text-6xl mb-10 text-gray-800'>
             {data.title}
           </h1>
-          <p className="text-md md:text-lg text-gray-600 w-10/12 m-auto">
+          <p className='text-md md:text-lg text-gray-600 w-10/12 m-auto'>
             {data.description}
           </p>
         </div>
         <a
-          target="_blank"
+          target='_blank'
           // if you are using Github OAuth, you can get rid of the Twitter option
           href={
             data.site.user.username
@@ -65,47 +65,47 @@ export default function Post(props) {
               : `https://github.com/${data.site.user.gh_username}`
           }
         >
-          <div className="my-8">
-            <div className="relative w-8 h-8 md:w-12 md:h-12 rounded-full overflow-hidden inline-block align-middle">
+          <div className='my-8'>
+            <div className='relative w-8 h-8 md:w-12 md:h-12 rounded-full overflow-hidden inline-block align-middle'>
               <BlurImage width={80} height={80} src={data.site.user.image} />
             </div>
-            <div className="inline-block text-md md:text-lg align-middle ml-3">
-              by <span className="font-semibold">{data.site.user.name}</span>
+            <div className='inline-block text-md md:text-lg align-middle ml-3'>
+              by <span className='font-semibold'>{data.site.user.name}</span>
             </div>
           </div>
         </a>
       </div>
-      <div className="relative h-80 md:h-150 w-full max-w-screen-lg lg:2/3 md:w-5/6 m-auto mb-10 md:mb-20 md:rounded-2xl overflow-hidden">
+      <div className='relative h-80 md:h-150 w-full max-w-screen-lg lg:2/3 md:w-5/6 m-auto mb-10 md:mb-20 md:rounded-2xl overflow-hidden'>
         <BlurImage
-          layout="fill"
-          objectFit="cover"
-          placeholder="blur"
+          layout='fill'
+          objectFit='cover'
+          placeholder='blur'
           blurDataURL={data.imageBlurhash}
           src={data.image}
         />
       </div>
 
-      <article className="w-11/12 sm:w-3/4 m-auto prose prose-md sm:prose-lg">
+      <article className='w-11/12 sm:w-3/4 m-auto prose prose-md sm:prose-lg'>
         <MDXRemote {...data.mdxSource} components={components} />
       </article>
 
       {adjacentPosts.length > 0 && (
-        <div className="relative mt-10 sm:mt-20 mb-20">
+        <div className='relative mt-10 sm:mt-20 mb-20'>
           <div
-            className="absolute inset-0 flex items-center"
-            aria-hidden="true"
+            className='absolute inset-0 flex items-center'
+            aria-hidden='true'
           >
-            <div className="w-full border-t border-gray-300" />
+            <div className='w-full border-t border-gray-300' />
           </div>
-          <div className="relative flex justify-center">
-            <span className="px-2 bg-white text-sm text-gray-500">
+          <div className='relative flex justify-center'>
+            <span className='px-2 bg-white text-sm text-gray-500'>
               Continue Reading
             </span>
           </div>
         </div>
       )}
       {adjacentPosts && (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8 mx-5 lg:mx-12 2xl:mx-auto mb-20 max-w-screen-xl">
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8 mx-5 lg:mx-12 2xl:mx-auto mb-20 max-w-screen-xl'>
           {adjacentPosts.map((data, index) => (
             <BlogCard key={index} data={data} />
           ))}
@@ -121,7 +121,7 @@ export async function getStaticPaths() {
       published: true,
       // you can remove this if you want to generate all sites at build time
       site: {
-        subdomain: "demo",
+        subdomain: 'demo',
       },
     },
     select: {
@@ -135,7 +135,7 @@ export async function getStaticPaths() {
     },
   });
   return {
-    paths: posts.flatMap((post) => {
+    paths: posts.flatMap(post => {
       if (post.site.customDomain) {
         return [
           { params: { site: post.site.customDomain, slug: post.slug } },
@@ -155,7 +155,7 @@ export async function getStaticProps({ params: { site, slug } }) {
       subdomain: site,
     },
   };
-  if (site.includes(".")) {
+  if (site.includes('.')) {
     constraint = {
       site: {
         customDomain: site,
@@ -210,8 +210,8 @@ async function getMdxSource(postContents) {
   // Use remark plugins to convert markdown into HTML string
   const processedContent = await remark()
     .use(remarkMdx) // native remark plugin that parses markdown into MDX
-    .use(replaceTweets) // replaces tweets with static <Tweet /> component
-    .use(() => replaceExamples(prisma)) // replaces examples with <Example /> component (only for demo.vercel.pub)
+    // .use(replaceTweets) // replaces tweets with static <Tweet /> component
+    .use(() => replaceExamples(prisma)) // replaces examples with <Example /> component (only for demo.myhomecomp.com)
     .process(postContents);
 
   // Convert converted html to string format

@@ -1,13 +1,13 @@
-import "@/styles/globals.css";
-import { SessionProvider } from "next-auth/react";
-import PlausibleProvider from "next-plausible";
+import '@/styles/globals.css';
+import { SessionProvider } from 'next-auth/react';
+import PlausibleProvider from 'next-plausible';
 
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <PlausibleProvider domain="demo.vercel.pub">
+    <PlausibleProvider domain='demo.myhomecomp.com'>
       <SessionProvider session={session}>
         <Component {...pageProps} />
       </SessionProvider>
