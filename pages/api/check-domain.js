@@ -2,12 +2,12 @@ export default async function checkDomain(req, res) {
   const { domain } = req.query;
 
   const response = await fetch(
-    `https://api.vercel.com/v6/domains/${domain}/config?teamId=${process.env.VERCEL_TEAM_ID}`,
+    `https://api.vercel.com/v6/domains/${domain}/config`,
     {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }
   );
